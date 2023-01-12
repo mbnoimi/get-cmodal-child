@@ -2,7 +2,7 @@
   <q-page class="row items-center justify-evenly">
     <q-btn
       id="show-modal"
-      @click="showModal = true"
+      @click="doModal"
       color="primary"
       icon="mail"
       label="Show Modal"
@@ -10,7 +10,7 @@
 
     <Teleport to="body">
       <!-- use the modal component, pass in the prop -->
-      <modal :show="showModal" @close="showModal = false">
+      <modal :show="showModal" @close="showModal = false" ref="dlg">
         <template #header>
           <q-btn id="jassem" label="Check Port" ref="focusSubmit" />
         </template>
@@ -23,11 +23,15 @@
 import { ref, onMounted } from 'vue';
 import Modal from 'src/components/ModalDialog.vue';
 
-const showModal = ref(false);
+let showModal = ref(false);
 const focusSubmit = ref(null);
+const dlg = ref(null);
 
-onMounted(() => {
-  ////// ERROR
-  console.log(focusSubmit.value.label);
-});
+function doModal(event) {
+  showModal.value = true;
+  if (event) {
+    ////// ERROR
+    console.log(focusSubmit.value);
+  }
+}
 </script>
