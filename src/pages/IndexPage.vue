@@ -18,6 +18,8 @@
             label="Standard"
             ref="focusSubmit"
           />
+
+          <q-input v-model="text2" label="Another one" />
         </template>
       </modal>
     </Teleport>
@@ -32,6 +34,7 @@ let showModal = ref(false);
 const focusSubmit = ref(null);
 const dlg = ref(null);
 const text = ref('');
+const text2 = ref('');
 
 async function doModal(event) {
   showModal.value = true;
