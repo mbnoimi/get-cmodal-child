@@ -12,7 +12,12 @@
       <!-- use the modal component, pass in the prop -->
       <modal :show="showModal" @close="showModal = false" ref="dlg">
         <template #header>
-          <q-btn id="jassem" label="Check Port" ref="focusSubmit" />
+          <q-input
+            id="jassem"
+            v-model="text"
+            label="Standard"
+            ref="focusSubmit"
+          />
         </template>
       </modal>
     </Teleport>
@@ -20,18 +25,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, nextTick } from 'vue';
 import Modal from 'src/components/ModalDialog.vue';
 
 let showModal = ref(false);
 const focusSubmit = ref(null);
 const dlg = ref(null);
+const text = ref('');
 
-function doModal(event) {
+async function doModal(event) {
   showModal.value = true;
+  await nextTick();
   if (event) {
-    ////// ERROR
-    console.log(focusSubmit.value);
+    console.log(focusSubmit.value.focus());
   }
 }
 </script>
